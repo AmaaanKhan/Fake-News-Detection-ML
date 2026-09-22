@@ -6,6 +6,7 @@ from sklearn.model_selection import train_test_split
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import LinearSVC
+from sklearn.calibration import CalibratedClassifierCV
 from sklearn.metrics import accuracy_score, classification_report
 
 
@@ -57,7 +58,7 @@ X_train, X_test, y_train, y_test = train_test_split(
 
 
 # -----------------------------
-# 4. TF-IDF feature extraction
+# 4. TF-IDF
 # -----------------------------
 
 vectorizer = TfidfVectorizer(
@@ -90,11 +91,15 @@ print(classification_report(y_test, logistic_pred))
 
 
 # -----------------------------
-# 6. Support Vector Machine
+# 6. SVM + probability calibration
 # -----------------------------
 
-svm_model = LinearSVC(
-    random_state=42
+svm_base = LinearSVC(random_state=42)
+
+svm_model = CalibratedClassifierCV(
+    svm_base,
+    method="sigmoid",
+    cv=3
 )
 
 svm_model.fit(X_train_tfidf, y_train)
@@ -107,12 +112,28 @@ print(classification_report(y_test, svm_pred))
 
 
 # -----------------------------
-# 7. Save models
+# 7. Ensemble
+# -----------------------------
+
+logistic_prob = logistic_model.predict_proba(X_test_tfidf)
+svm_prob = svm_model.predict_proba(X_test_tfidf)
+
+ensemble_prob = (logistic_prob + svm_prob) / 2
+
+ensemble_pred = ensemble_prob.argmax(axis=1)
+
+print("\n=== Ensemble ===")
+print("Accuracy:", accuracy_score(y_test, ensemble_pred))
+print(classification_report(y_test, ensemble_pred))
+
+
+# -----------------------------
+# 8. Save models
 # -----------------------------
 
 joblib.dump(vectorizer, "models/tfidf_vectorizer.pkl")
 joblib.dump(logistic_model, "models/logistic_model.pkl")
-joblib.dump(svm_model, "models/svm_model.pkl")
+joblib.dump(svm_model, "models/svm_calibrated_model.pkl")
 
 
-print("\nModels saved successfully in models/")
+print("\nAll models saved successfully.")
