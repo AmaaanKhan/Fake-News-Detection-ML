@@ -16,8 +16,6 @@ A machine learning-based fake news classification system that accepts either tex
 - Fake and real probability scores
 - Streamlit web interface
 
-## System Workflow
-
 ### Text Input
 
 Text → Preprocessing → TF-IDF → Logistic Regression + SVM → Ensemble → Prediction
