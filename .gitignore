@@ -4,3 +4,11 @@ __pycache__/
 .env
 .vscode/
 .DS_Store
+
+# Local dataset
+data/
+
+# Test images
+tests/*.jpg
+tests/*.jpeg
+tests/*.png
