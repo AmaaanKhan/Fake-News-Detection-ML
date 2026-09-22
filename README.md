@@ -114,6 +114,15 @@ The probability represents the model's classification confidence based on patter
 - Streamlit
 - Git/GitHub
 
+
+## Screenshots
+<img width="1917" height="1017" alt="Screenshot 2026-09-22 181024" src="https://github.com/user-attachments/assets/cf8fa873-ab74-464e-8984-5b7e6f60461f" />
+<img width="1910" height="1018" alt="Screenshot 2026-09-22 181038" src="https://github.com/user-attachments/assets/9fb1a332-7e38-4005-a84c-0cc551329b45" />
+<img width="1917" height="1017" alt="Screenshot 2026-09-22 184726" src="https://github.com/user-attachments/assets/4cf06917-3da3-43a9-8ce2-6b4333ed2804" />
+<img width="1917" height="1017" alt="Screenshot 2026-09-22 184745" src="https://github.com/user-attachments/assets/7398868a-8418-4515-b34e-f6bf70c48e1a" />
+
+
+
 ## Project Structure
 
 ```text
